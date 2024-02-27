@@ -1,30 +1,24 @@
-import React, { useEffect } from "react";
-import { MD5 } from 'crypto-js';
+import React, { useEffect, useState } from "react";
+import { getIds, getItems } from './api';
+
 // import './style.css';
 
 export default function App() {
+  const [ids, setIds] = useState<Array<string>>([]);
+  const [pageItems, setPageItems] = useState<Array<any>>([]);
  
   useEffect(() => {
-    const date = new Date(); 
-    const month = date.getUTCMonth() + 1 < 10 ? `0${date.getUTCMonth() + 1}` : date.getUTCMonth() + 1;
-    const day = date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : date.getUTCDate();
-    
-    console.log(`Valantis_${date.getUTCFullYear()}${month}${day}`);
+    getIds().then(response => setIds(response.result));
 
-    fetch('http://api.valantis.store:40000/', {
-      headers: {
-        'X-Auth': MD5(`Valantis_${date.getUTCFullYear()}${month}${day}`).toString(),
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        "action": "get_ids",
-	      "params": {"offset": 0, "limit": 50}
-      })
-    })
-      .then(res => res.text())
-      .then((data) => console.log(data))
   }, []);
+
+  useEffect(() => {
+    getItems(ids.slice(0, 50)).then(response => setPageItems(response.result));
+
+  }, [ids]);
+
+  console.log(ids);
+  console.log(pageItems);
 
   return (
     <>
