@@ -4,8 +4,9 @@ const getAuth = () => {
   const date = new Date();
   const month = date.getUTCMonth() + 1 < 10 ? `0${date.getUTCMonth() + 1}` : date.getUTCMonth() + 1;
   const day = date.getUTCDate() < 10 ? `0${date.getUTCDate()}` : date.getUTCDate();
+  const password = 'Valantis';
 
-  return MD5(`Valantis_${date.getUTCFullYear()}${month}${day}`).toString();
+  return MD5(`${password}_${date.getUTCFullYear()}${month}${day}`).toString();
 }
 
 export const getIds = (offset = 0, limit: number = undefined) => {

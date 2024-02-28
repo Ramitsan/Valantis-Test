@@ -1,0 +1,13 @@
+.cards-wrapper {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.cards-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-left: 0;
+}
