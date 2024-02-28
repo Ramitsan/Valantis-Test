@@ -17,12 +17,11 @@ export const getIds = (offset = 0, limit: number = undefined) => {
     },
     method: 'POST',
     body: JSON.stringify({
-      "action": "get_ids",
-      "params": { "offset": offset, "limit": limit }
+      action: "get_ids",
+      params: { offset, limit }
     })
   })
-    .then(res => res.json())
-    // .then((data) => console.log(data))
+    .then(res => res.json());
 }
 
 export const getItems = (ids: Array<string>) => {
@@ -33,11 +32,42 @@ export const getItems = (ids: Array<string>) => {
     },
     method: 'POST',
     body: JSON.stringify({
-      "action": "get_items",
-      "params": { ids }
+      action: "get_items",
+      params: { ids }
     })
   })
-    .then(res => res.json())
-    // .then((data) => console.log(data))
+    .then(res => res.json());
 }
+
+
+export const getFields = (field?: string, offset?: number, limit?: number) => {
+  return fetch('http://api.valantis.store:40000/', {
+    headers: {
+      'X-Auth': getAuth(),
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      action: "get_fields",
+      params: { field, offset, limit }
+    })
+  })
+    .then(res => res.json());
+}
+
+export const filter = (product: string, brand: string, price: number) => {
+  return fetch('http://api.valantis.store:40000/', {
+    headers: {
+      'X-Auth': getAuth(),
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      action: "filter",
+      params: { product, brand, price }
+    })
+  })
+    .then(res => res.json());
+}
+
 
