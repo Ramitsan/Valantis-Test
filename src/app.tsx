@@ -9,6 +9,7 @@ export default function App() {
   const [pageItems, setPageItems] = useState<Array<any>>([]);
   const [page, setPage] = useState(0);
   const [fields, setFields] = useState<ICardFields>({ brand: [], product: [], price: [] });
+  const [currentProduct, setCurrentProduct] = useState('');
 
   useEffect(() => {
     getIds().then(response => setIds(response.result));
@@ -33,6 +34,17 @@ export default function App() {
     getItems(ids.slice(page * 50, (page + 1) * 50)).then(response => setPageItems(response.result));
   }, [ids, page]);
 
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      console.log('update');
+      filter(currentProduct, undefined, undefined).then(response => console.log(response.result));
+    }, 2000);
+  
+    return () => {
+      clearTimeout(timerId);
+    }
+  }, [currentProduct]);
+
   // console.log(ids);
   // console.log(pageItems);
 
@@ -49,6 +61,10 @@ export default function App() {
       <div className="wrapper">
         <div className="filter-list">{fields.brand.map(it => <div onClick={() => filterBrand(it)}>{it || 'Без бренда'}</div>)}</div>
         <div className="filter-list">{fields.price.map(it => <div onClick={() => filterPrice(it)}>{it}</div>)}</div>
+
+        <input type="text" onChange={(evt) => {
+          setCurrentProduct(evt.target.value);
+        }} />
         <CardsList cardItems={pageItems} />
 
         <div className="pagination">
