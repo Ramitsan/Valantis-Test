@@ -11,7 +11,7 @@ export function CardsList({cardItems}: CardListPropsType) {
   return (
     <div className="cards-wrapper">
       <ul className="cards-list">
-        {cardItems.map(it => <Card item={it}/>)}
+        {cardItems.map((it, index) => <Card key={index} item={it}/>)}
       </ul>
     </div>
   )

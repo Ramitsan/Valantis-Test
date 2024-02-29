@@ -1,5 +1,21 @@
-.filter-list {
-  width: 300px;
-  height: 400px;
-  overflow: scroll;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+  box-sizing: border-box;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
 }
