@@ -11,6 +11,7 @@ body {
   font-weight: normal;
   font-size: 18px;
   line-height: 140%;
+  background-color: #d9f1f8;
 }
 
 #root {
@@ -18,4 +19,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start; 
+}
+
+.main-wrapper {
+  width: 80%;
+  margin: 0 auto;
 }

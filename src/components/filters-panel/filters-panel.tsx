@@ -20,7 +20,7 @@ export function FiltersPanel() {
 
     getFields('price').then(response => setFields(last => ({
       ...last,
-      price: Array.from(new Set<number>(response.result).keys()),
+      price: Array.from(new Set<number>(response.result).keys()).sort((a, b) => a - b),
     })));
   }, [])
 
@@ -29,13 +29,30 @@ export function FiltersPanel() {
   }
 
   const filterPrice = (price: number) => {
-    filter(undefined, undefined, price).then(response => console.log(response.result));
-  }
+    filter(undefined, undefined, price).then(response => console.log(response.result))};
 
   return (
     <div className="filters-panel">
-      <div className="filter-list">{fields.brand.map(it => <div onClick={() => filterBrand(it)}>{it || 'Без бренда'}</div>)}</div>
-      <div className="filter-list">{fields.price.map(it => <div onClick={() => filterPrice(it)}>{it}</div>)}</div>
+      <div className="filter-block">
+        <p className="filter-title">Выберите бренд:</p>
+        <div className="filter-list">
+          {fields.brand.map(it => {
+            return (
+              <div className="filter-item filter-item--brand" onClick={() => filterBrand(it)}>{it || 'Без бренда'}</div>
+            )
+          })}
+        </div>
+      </div>
+      <div className="filter-block">
+        <p className="filter-title">Укажите цену:</p>
+        <div className="filter-list">
+          {fields.price.map(it => {
+            return (
+              <div className="filter-item filter-item--price" onClick={() => filterPrice(it)}>{it}</div>
+            )
+          })}
+        </div>
+      </div>
       <ProductsSearch />
     </div>
   )
