@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getIds, getItems } from './api';
 import { CardsList } from './components/cards-list/cards-list';
 import { FiltersPanel } from './components/filters-panel/filters-panel';
+import { Pagination } from './components/pagination/pagination';
 import './style.css';
 
 export default function App() {
@@ -22,11 +23,7 @@ export default function App() {
       <div className="main-wrapper">
         <FiltersPanel />           
         <CardsList cardItems={pageItems} />
-
-        <div className="pagination">
-          <button onClick={() => setPage(last => Math.max(last - 1, 0))}>Back</button>
-          <button onClick={() => setPage(last => Math.min(last + 1, Math.ceil(ids.length / 50)))}>Next</button>
-        </div>
+        <Pagination onChange={(value) => setPage(value)} currentPage={page} maxPage={Math.ceil(ids.length / 50)} />
       </div>
     </>
   )
