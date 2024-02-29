@@ -3,12 +3,15 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 20px;
   background-color: #fff;
   border-radius: 10px;
 }
 
-.filter-block {
+.filter-block,
+.search-block {
+  width: 33%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -16,27 +19,7 @@
 }
 
 .filter-title {
+  margin: 0px;
+  margin-bottom: 10px;
   font-weight: bold;
-}
-
-.filter-list {
-  width: 300px;
-  height: 150px;
-  overflow: overlay;
-  margin: 5px 20px;
-  background-color: #fff;
-}
-
-.filter-item {
-  padding: 5px;
-  padding-left: 10px;
-  border-bottom: 1px solid #f3f3f3;
-  cursor: pointer;
-  transition: all .2s ease;
-}
-
-.filter-item:focus,
-.filter-item:hover {  
-  color: #0ba2ea;
-  transition: all .2s ease;
 }

@@ -1,0 +1,47 @@
+.select {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.select__input {
+  width: 80%;
+  padding: 10px 7px;
+  border: 1px solid #79c8eb;
+}
+
+.select__input:focus,
+.select__input:hover {
+  box-shadow: 0px 0px 6px #a7ccf0;
+  outline: 0;
+}
+
+.select__container {
+  width: 80%;
+  height: 0;
+  position: absolute;  
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition-duration: 400ms;
+}
+
+.select__container--open {
+  height: 350px;
+}
+
+.select__item {
+  padding: 5px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #f3f3f3;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.select__item:focus,
+.select__item:hover {  
+  color: #0ba2ea;
+  transition: all .2s ease;
+}

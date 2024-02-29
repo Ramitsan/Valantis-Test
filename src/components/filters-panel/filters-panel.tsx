@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getFields, filter } from '../../api';
 import { ICardFields } from "../../interfaces";
 import { ProductsSearch } from '../products-search/products-search';
+import { Select } from '../select/select';
 import './filters-panel.css';
 
 export function FiltersPanel() {
@@ -29,31 +30,23 @@ export function FiltersPanel() {
   }
 
   const filterPrice = (price: number) => {
-    filter(undefined, undefined, price).then(response => console.log(response.result))};
+    filter(undefined, undefined, price).then(response => console.log(response.result))
+  };
 
   return (
     <div className="filters-panel">
       <div className="filter-block">
         <p className="filter-title">Выберите бренд:</p>
-        <div className="filter-list">
-          {fields.brand.map(it => {
-            return (
-              <div className="filter-item filter-item--brand" onClick={() => filterBrand(it)}>{it || 'Без бренда'}</div>
-            )
-          })}
-        </div>
+        <Select items={fields.brand} onSelect={(value) => filterBrand(value?.toString())}/>
       </div>
       <div className="filter-block">
         <p className="filter-title">Укажите цену:</p>
-        <div className="filter-list">
-          {fields.price.map(it => {
-            return (
-              <div className="filter-item filter-item--price" onClick={() => filterPrice(it)}>{it}</div>
-            )
-          })}
-        </div>
+        <Select items={fields.price} onSelect={(value) => filterPrice(Number(value))}/>
       </div>
-      <ProductsSearch />
+      <div className="search-block">
+      <p className="filter-title">Поиск по названию:</p>
+        <ProductsSearch />
+      </div>
     </div>
   )
 }

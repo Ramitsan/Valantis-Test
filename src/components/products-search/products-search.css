@@ -1,8 +1,7 @@
 .search-input {
-  width: 300px;
+  width: 80%;
   padding: 10px 7px;
   border: 1px solid #79c8eb;
-  color: #0ba2ea;
 }
 
 .search-input:focus,
