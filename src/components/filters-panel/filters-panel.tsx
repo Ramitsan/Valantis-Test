@@ -33,15 +33,17 @@ export function FiltersPanel() {
     filter(undefined, undefined, price).then(response => console.log(response.result))
   };
 
+  const selectBrandsItems = fields.brand.map(it => it ? it : 'Без бренда');
+
   return (
     <div className="filters-panel">
       <div className="filter-block">
         <p className="filter-title">Выберите бренд:</p>
-        <Select items={fields.brand} onSelect={(value) => filterBrand(value?.toString())}/>
+        <Select items={selectBrandsItems} onSelect={(index) => filterBrand(fields.brand[index])}/>
       </div>
       <div className="filter-block">
         <p className="filter-title">Укажите цену:</p>
-        <Select items={fields.price} onSelect={(value) => filterPrice(Number(value))}/>
+        <Select items={fields.price} onSelect={(index) => filterPrice(fields.price[index])}/>
       </div>
       <div className="search-block">
       <p className="filter-title">Поиск по названию:</p>
