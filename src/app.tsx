@@ -23,7 +23,7 @@ export default function App() {
       <div className="main-wrapper">
         <FiltersPanel onFilter={filters => {
           console.log(125, JSON.stringify(filters));
-          if(filters.brand == undefined && filters.price == undefined && filters.product == '') {
+          if(filters.brand == undefined && filters.price == undefined && (filters.product == '' || filters.product == undefined) ) {
             getIds().then(response => setIds(response.result));
           } else {
             filter(filters.product == '' ? undefined : filters.product, filters.brand, filters.price).then(response => setIds(response.result));

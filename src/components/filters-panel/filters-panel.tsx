@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getFields, filter } from '../../api';
+import { getFields } from '../../api';
 import { ICardFields, IFiltersData } from "../../interfaces";
 import { ProductsSearch } from '../products-search/products-search';
 import { Select } from '../select/select';

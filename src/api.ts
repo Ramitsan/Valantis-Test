@@ -1,4 +1,5 @@
 import { MD5 } from 'crypto-js';
+import { ICardData } from './interfaces';
 
 const getAuth = () => {
   const date = new Date();
@@ -9,7 +10,7 @@ const getAuth = () => {
   return MD5(`${password}_${date.getUTCFullYear()}${month}${day}`).toString();
 }
 
-export const getIds = (offset = 0, limit: number = undefined) => {
+export const getIds = (offset = 0, limit: number = undefined): Promise<{result: Array<string>}> => {
   return fetch('http://api.valantis.store:40000/', {
     headers: {
       'X-Auth': getAuth(),
@@ -21,10 +22,17 @@ export const getIds = (offset = 0, limit: number = undefined) => {
       params: { offset, limit }
     })
   })
-    .then(res => res.json());
+  .then(res => {
+    if( res.status == 500) {
+      console.log(res.status);
+      return getIds(offset, limit);
+    } else {
+      return res.json();
+    }     
+  });
 }
 
-export const getItems = (ids: Array<string>) => {
+export const getItems = (ids: Array<string>): Promise<{result: Array<ICardData>}> => {
   return fetch('http://api.valantis.store:40000/', {
     headers: {
       'X-Auth': getAuth(),
@@ -36,11 +44,23 @@ export const getItems = (ids: Array<string>) => {
       params: { ids }
     })
   })
-    .then(res => res.json());
+  .then(res => {
+    if( res.status == 500) {
+      console.log(res.status);
+      return getItems(ids);
+    } else {
+      return res.json();
+    }     
+  });
 }
 
+type FieldsTypeMap = {
+  brand: string,
+  price: number,
+  product: string
+}
 
-export const getFields = (field?: string, offset?: number, limit?: number) => {
+export const getFields = <T extends keyof FieldsTypeMap> (field?: T, offset?: number, limit?: number): Promise<{ result: Array<FieldsTypeMap[T]>}> => {
   return fetch('http://api.valantis.store:40000/', {
     headers: {
       'X-Auth': getAuth(),
@@ -52,10 +72,18 @@ export const getFields = (field?: string, offset?: number, limit?: number) => {
       params: { field, offset, limit }
     })
   })
-    .then(res => res.json());
+    .then(res => {
+      if( res.status == 500) {
+        console.log(res.status);
+        return getFields(field, offset, limit);
+      } else {
+        return res.json();
+      }     
+    });
+
 }
 
-export const filter = (product: string, brand: string, price: number) => {
+export const filter = (product: string, brand: string, price: number): Promise<{result: Array<string>}> => {
   return fetch('http://api.valantis.store:40000/', {
     headers: {
       'X-Auth': getAuth(),
@@ -67,7 +95,14 @@ export const filter = (product: string, brand: string, price: number) => {
       params: { product, brand, price }
     })
   })
-    .then(res => res.json());
+  .then(res => {
+    if( res.status == 500) {
+      console.log(res.status);
+      return filter(product, brand, price);
+    } else {
+      return res.json();
+    }     
+  });
 }
 
 
