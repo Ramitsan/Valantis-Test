@@ -10,7 +10,7 @@ const getAuth = () => {
   return MD5(`${password}_${date.getUTCFullYear()}${month}${day}`).toString();
 }
 
-export const getIds = (offset = 0, limit: number = undefined): Promise<{result: Array<string>}> => {
+export const getIds = (offset = 0, limit: number = undefined): Promise<{ result: Array<string> }> => {
   return fetch('http://api.valantis.store:40000/', {
     headers: {
       'X-Auth': getAuth(),
@@ -22,17 +22,19 @@ export const getIds = (offset = 0, limit: number = undefined): Promise<{result: 
       params: { offset, limit }
     })
   })
-  .then(res => {
-    if( res.status == 500) {
-      console.log(res.status);
-      return getIds(offset, limit);
-    } else {
-      return res.json();
-    }     
-  });
+    .then(res => {
+      if (res.status == 500) {
+        return res.text().then(text => {
+          console.log(res.status.toString(), text);
+          return getIds(offset, limit);
+        })
+      } else {
+        return res.json();
+      }
+    });
 }
 
-export const getItems = (ids: Array<string>): Promise<{result: Array<ICardData>}> => {
+export const getItems = (ids: Array<string>): Promise<{ result: Array<ICardData> }> => {
   return fetch('http://api.valantis.store:40000/', {
     headers: {
       'X-Auth': getAuth(),
@@ -44,14 +46,16 @@ export const getItems = (ids: Array<string>): Promise<{result: Array<ICardData>}
       params: { ids }
     })
   })
-  .then(res => {
-    if( res.status == 500) {
-      console.log(res.status);
-      return getItems(ids);
-    } else {
-      return res.json();
-    }     
-  });
+    .then(res => {
+      if (res.status == 500) {
+        return res.text().then(text => {
+          console.log(res.status.toString(), text);
+          return getItems(ids);
+        })
+      } else {
+        return res.json();
+      }
+    });
 }
 
 type FieldsTypeMap = {
@@ -60,7 +64,7 @@ type FieldsTypeMap = {
   product: string
 }
 
-export const getFields = <T extends keyof FieldsTypeMap> (field?: T, offset?: number, limit?: number): Promise<{ result: Array<FieldsTypeMap[T]>}> => {
+export const getFields = <T extends keyof FieldsTypeMap>(field?: T, offset?: number, limit?: number): Promise<{ result: Array<FieldsTypeMap[T]> }> => {
   return fetch('http://api.valantis.store:40000/', {
     headers: {
       'X-Auth': getAuth(),
@@ -73,17 +77,19 @@ export const getFields = <T extends keyof FieldsTypeMap> (field?: T, offset?: nu
     })
   })
     .then(res => {
-      if( res.status == 500) {
-        console.log(res.status);
-        return getFields(field, offset, limit);
+      if (res.status == 500) {
+        return res.text().then(text => {
+          console.log(res.status.toString(), text);
+          return getFields(field, offset, limit);
+        })
       } else {
         return res.json();
-      }     
+      }
     });
 
 }
 
-export const filter = (product: string, brand: string, price: number): Promise<{result: Array<string>}> => {
+export const filter = (product: string, brand: string, price: number): Promise<{ result: Array<string> }> => {
   return fetch('http://api.valantis.store:40000/', {
     headers: {
       'X-Auth': getAuth(),
@@ -95,14 +101,16 @@ export const filter = (product: string, brand: string, price: number): Promise<{
       params: { product, brand, price }
     })
   })
-  .then(res => {
-    if( res.status == 500) {
-      console.log(res.status);
-      return filter(product, brand, price);
-    } else {
-      return res.json();
-    }     
-  });
+    .then(res => {
+      if (res.status == 500) {
+        return res.text().then(text => {
+          console.log(res.status.toString(), text);
+          return filter(product, brand, price);
+        })
+      } else {
+        return res.json();
+      }
+    });
 }
 
 

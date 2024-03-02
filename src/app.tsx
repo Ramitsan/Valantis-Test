@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getIds, getItems, filter } from './api';
 import { CardsList } from './components/cards-list/cards-list';
 import { FiltersPanel } from './components/filters-panel/filters-panel';
@@ -10,13 +10,18 @@ export default function App() {
   const [pageItems, setPageItems] = useState<Array<any>>([]);
   const [page, setPage] = useState(0); 
 
+  const notDublicatedIds = useMemo(() => {
+    return Array.from(new Set<string>(ids).keys());
+  }, [ids])
+
   useEffect(() => {
     getIds().then(response => setIds(response.result));
   }, []);
 
   useEffect(() => {
-    getItems(ids.slice(page * 50, (page + 1) * 50)).then(response => setPageItems(response.result));
-  }, [ids, page]);
+    console.log(notDublicatedIds);
+    getItems(notDublicatedIds.slice(page * 50, (page + 1) * 50)).then(response => setPageItems(response.result));
+  }, [notDublicatedIds, page]);
 
   return (
     <>
@@ -30,7 +35,7 @@ export default function App() {
           }
         }} />           
         <CardsList cardItems={pageItems} />
-        <Pagination onChange={(value) => setPage(value)} currentPage={page} maxPage={Math.ceil(ids.length / 50)} />
+        <Pagination onChange={(value) => setPage(value)} currentPage={page} maxPage={Math.ceil(notDublicatedIds.length / 50)} />
       </div>
     </>
   )
