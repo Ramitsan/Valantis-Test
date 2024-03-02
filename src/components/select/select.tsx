@@ -26,12 +26,12 @@ export function Select({ items, onSelect, currentIndex }: ISelectProps) {
         onBlur={() => { setOpen(false) }}
       />
       <div className={`select__container ${open ? "select__container--open" : ""}`}>
-      <div className="select__item" key={'-1'} onMouseDown={() => {
+      <div className={`select__item ${-1 == selected ? "select__item--selected" : ""} `} key={'-1'} onMouseDown={() => {
               setSelected(-1);
             }}>{'Not selected'}</div>
         {items.map((it, index) => {
           return (
-            <div className="select__item" key={index} onMouseDown={() => {
+            <div className={`select__item ${index == selected ? "select__item--selected" : ""} `} key={index} onMouseDown={() => {
               setSelected(index);
             }}>{it || 'Без бренда'}</div>
           )

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { getFields, filter } from '../../api';
-import { ICardFields } from "../../interfaces";
+import { ICardFields, IFiltersData } from "../../interfaces";
 import { ProductsSearch } from '../products-search/products-search';
 import { Select } from '../select/select';
 import './filters-panel.css';
 
-export function FiltersPanel() {
+interface IFiltersPanelProps {
+  onFilter: (filters: IFiltersData) => void
+}
+
+export function FiltersPanel({onFilter} : IFiltersPanelProps) {
   const [fields, setFields] = useState<ICardFields>({ brand: [], product: [], price: [] });
+  const [filters, setFilters] = useState<IFiltersData>({brand: undefined, price: undefined, product: undefined});
 
   useEffect(() => {
     getFields('brand').then(response => setFields(last => ({
@@ -23,15 +28,23 @@ export function FiltersPanel() {
       ...last,
       price: Array.from(new Set<number>(response.result).keys()).sort((a, b) => a - b),
     })));
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    onFilter(filters);
+  }, [filters]);
 
   const filterBrand = (brand: string) => {
-    filter(undefined, brand, undefined).then(response => console.log(response.result));
+    setFilters(last => ({...last, brand}))
   }
 
   const filterPrice = (price: number) => {
-    filter(undefined, undefined, price).then(response => console.log(response.result))
+    setFilters(last => ({...last, price}))
   };
+
+  const handleSearch = (product: string) => {
+    setFilters(last => ({...last, product}))
+  }
 
   const selectBrandsItems = fields.brand.map(it => it ? it : 'Без бренда');
 
@@ -47,7 +60,7 @@ export function FiltersPanel() {
       </div>
       <div className="search-block">
       <p className="filter-title">Поиск по названию:</p>
-        <ProductsSearch />
+        <ProductsSearch onSearch={handleSearch}/>
       </div>
     </div>
   )

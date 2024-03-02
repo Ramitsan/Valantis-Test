@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getIds, getItems } from './api';
+import { getIds, getItems, filter } from './api';
 import { CardsList } from './components/cards-list/cards-list';
 import { FiltersPanel } from './components/filters-panel/filters-panel';
 import { Pagination } from './components/pagination/pagination';
@@ -21,7 +21,14 @@ export default function App() {
   return (
     <>
       <div className="main-wrapper">
-        <FiltersPanel />           
+        <FiltersPanel onFilter={filters => {
+          console.log(125, JSON.stringify(filters));
+          if(filters.brand == undefined && filters.price == undefined && filters.product == '') {
+            getIds().then(response => setIds(response.result));
+          } else {
+            filter(filters.product == '' ? undefined : filters.product, filters.brand, filters.price).then(response => setIds(response.result));
+          }
+        }} />           
         <CardsList cardItems={pageItems} />
         <Pagination onChange={(value) => setPage(value)} currentPage={page} maxPage={Math.ceil(ids.length / 50)} />
       </div>

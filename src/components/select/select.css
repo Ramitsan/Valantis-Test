@@ -45,3 +45,7 @@
   color: #0ba2ea;
   transition: all .2s ease;
 }
+
+.select__item--selected {
+  background-color: aquamarine;
+}

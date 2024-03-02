@@ -10,3 +10,9 @@ export interface ICardFields {
   product: Array<string>, 
   price: Array<number>
 }
+
+export interface IFiltersData {
+  brand: string, 
+  price: number, 
+  product: string
+}

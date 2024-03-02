@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import { filter } from '../../api';
 import './products-search.css';
 
-export function ProductsSearch() {
+interface IProductSearchProps {
+  onSearch: (value: string) => void
+}
+
+export function ProductsSearch({onSearch} : IProductSearchProps) {
   const [currentProduct, setCurrentProduct] = useState('');
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       console.log('update');
-      filter(currentProduct, undefined, undefined).then(response => console.log(response.result));
+      onSearch(currentProduct);
     }, 2000);
   
     return () => {
