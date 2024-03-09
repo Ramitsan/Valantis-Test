@@ -19,6 +19,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start; 
+  padding: 20px 0 50px;
 }
 
 .main-wrapper {

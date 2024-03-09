@@ -1,0 +1,51 @@
+.pagination {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination__button {
+  width: 45%;
+  position: relative;
+  padding: 10px;
+  background-color: #9609c9;
+  color: #fff;
+  border: 1px solid #9609c9;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination__button:hover {
+  border: 1px solid #fff;
+}
+
+.pagination__button:active {
+  opacity: .7;
+}
+
+.pagination__button--back::after {
+  content: "";
+  position: absolute;
+  background-image: url("../../assets/icons/arrow-left.svg");
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 15px;
+  background-size: 10px 15px;
+  background-repeat: no-repeat;
+}
+
+.pagination__button--next::after {
+  content: "";
+  position: absolute;
+  background-image: url("../../assets/icons/arrow-right.svg");
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 15px;
+  background-size: 10px 15px;
+  background-repeat: no-repeat;
+}
