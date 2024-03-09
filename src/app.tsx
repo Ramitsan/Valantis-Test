@@ -3,6 +3,7 @@ import { getFields, getIds, getItems, filter } from './api';
 import { CardsList } from './components/cards-list/cards-list';
 import { FiltersPanel } from './components/filters-panel/filters-panel';
 import { Pagination } from './components/pagination/pagination';
+import { Loading } from './components/loading/loading';
 import './style.css';
 import { ICardFields, IFiltersData } from "./interfaces";
 
@@ -12,27 +13,33 @@ export default function App() {
   const [page, setPage] = useState(0); 
   const [fields, setFields] = useState<ICardFields>({ brand: [], product: [], price: [] });
   const [productFilters, setProductFilters] = useState<IFiltersData>({brand: undefined, price: undefined, product: ''});
+  const [loading, setLoading] = useState(true);
 
   const notDublicatedIds = useMemo(() => {
     return Array.from(new Set<string>(ids).keys());
   }, [ids])
 
   useEffect(() => {
+    setLoading(true);
     const filters = productFilters;
     if(filters.brand == undefined && filters.price == undefined && (filters.product == '' || filters.product == undefined) ) {
       getIds().then(response => setIds(response.result));
     } else {
       filter(filters.product == '' ? undefined : filters.product, filters.brand, filters.price).then(response => setIds(response.result));
     }
-    // getIds().then(response => setIds(response.result));
   }, [productFilters]);
 
   useEffect(() => {
     if(!notDublicatedIds.length) {
       setPageItems([]);
+      // setLoading(false);
       return;
     }
-    getItems(notDublicatedIds.slice(page * 50, (page + 1) * 50)).then(response => setPageItems(response.result));
+    setLoading(true);
+    getItems(notDublicatedIds.slice(page * 50, (page + 1) * 50)).then(response => {
+      setPageItems(response.result);
+      // setLoading(false);
+    });
   }, [notDublicatedIds, page]);
 
   useEffect(() => {
@@ -57,7 +64,8 @@ export default function App() {
       <div className="main-wrapper">
         <FiltersPanel initialFilters={productFilters} fields={fields} onFilter={filters => {
           setProductFilters(filters);      
-        }} />           
+        }} />       
+        {loading && <Loading />}    
         <CardsList cardItems={pageItems} />
         <Pagination onChange={(value) => setPage(value)} currentPage={page} maxPage={Math.ceil(notDublicatedIds.length / 50)} />
       </div>
