@@ -23,7 +23,7 @@ export function ProductsSearch({onSearch, initialProduct} : IProductSearchProps)
     }
   }, [currentProduct]);
   return (
-    <input className="search-input" type="text" placeholder="Search product"
+    <input className="search-input" type="text" placeholder="Search product" value={currentProduct || ''}
     onChange={(evt) => {
       setCurrentProduct(evt.target.value);
     }} />

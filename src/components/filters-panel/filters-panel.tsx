@@ -26,21 +26,21 @@ export function FiltersPanel({onFilter, fields, initialFilters} : IFiltersPanelP
     if(brand == filters.brand) {
       return;
     }
-    setFilters(last => ({...last, brand}))
+    setFilters(last => ({...last, brand, product: undefined, price: undefined}))
   }
 
   const filterPrice = (price: number) => {
     if(price == filters.price) {
       return;
     }
-    setFilters(last => ({...last, price}))
+    setFilters(last => ({...last, price, brand: undefined, product: undefined}))
   };
 
   const handleSearch = (product: string) => {
     if(product == filters.product) {
       return;
     }
-    setFilters(last => ({...last, product}))
+    setFilters(last => ({...last, product, brand: undefined, price: undefined}))
   }
 
   const selectBrandsItems = fields.brand.filter(it => it);
@@ -49,11 +49,11 @@ export function FiltersPanel({onFilter, fields, initialFilters} : IFiltersPanelP
     <div className="filters-panel">
       <div className="filter-block">
         <p className="filter-title">Выберите бренд:</p>
-        <Select items={selectBrandsItems} onSelect={(index) => filterBrand(selectBrandsItems[index])}/>
+        <Select items={selectBrandsItems} currentIndex={selectBrandsItems.findIndex(it => it == filters.brand)} onSelect={(index) => filterBrand(selectBrandsItems[index])}/>
       </div>
       <div className="filter-block">
         <p className="filter-title">Укажите цену:</p>
-        <Select items={fields.price} onSelect={(index) => filterPrice(fields.price[index])}/>
+        <Select items={fields.price} currentIndex={fields.price.findIndex(it => it == filters.price)} onSelect={(index) => filterPrice(fields.price[index])}/>
       </div>
       <div className="search-block">
       <p className="filter-title">Поиск по названию:</p>

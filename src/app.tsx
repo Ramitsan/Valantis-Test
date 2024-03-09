@@ -13,7 +13,7 @@ export default function App() {
   const [page, setPage] = useState(0); 
   const [fields, setFields] = useState<ICardFields>({ brand: [], product: [], price: [] });
   const [productFilters, setProductFilters] = useState<IFiltersData>({brand: undefined, price: undefined, product: ''});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const notDublicatedIds = useMemo(() => {
     return Array.from(new Set<string>(ids).keys());
@@ -32,13 +32,13 @@ export default function App() {
   useEffect(() => {
     if(!notDublicatedIds.length) {
       setPageItems([]);
-      // setLoading(false);
+      setLoading(false);
       return;
     }
     setLoading(true);
     getItems(notDublicatedIds.slice(page * 50, (page + 1) * 50)).then(response => {
       setPageItems(response.result);
-      // setLoading(false);
+      setLoading(false);
     });
   }, [notDublicatedIds, page]);
 
