@@ -1,6 +1,8 @@
 import { MD5 } from 'crypto-js';
 import { ICardData } from './interfaces';
 
+const url = 'https://api.valantis.store:41000/';
+
 const getAuth = () => {
   const date = new Date();
   const month = date.getUTCMonth() + 1 < 10 ? `0${date.getUTCMonth() + 1}` : date.getUTCMonth() + 1;
@@ -11,7 +13,7 @@ const getAuth = () => {
 }
 
 export const getIds = (offset = 0, limit: number = undefined): Promise<{ result: Array<string> }> => {
-  return fetch('http://api.valantis.store:40000/', {
+  return fetch(url, {
     headers: {
       'X-Auth': getAuth(),
       'Content-Type': 'application/json'
@@ -34,7 +36,7 @@ export const getIds = (offset = 0, limit: number = undefined): Promise<{ result:
 }
 
 export const getItems = (ids: Array<string>): Promise<{ result: Array<ICardData> }> => {
-  return fetch('http://api.valantis.store:40000/', {
+  return fetch(url, {
     headers: {
       'X-Auth': getAuth(),
       'Content-Type': 'application/json'
@@ -63,7 +65,7 @@ type FieldsTypeMap = {
 }
 
 export const getFields = <T extends keyof FieldsTypeMap>(field?: T, offset?: number, limit?: number): Promise<{ result: Array<FieldsTypeMap[T]> }> => {
-  return fetch('http://api.valantis.store:40000/', {
+  return fetch(url, {
     headers: {
       'X-Auth': getAuth(),
       'Content-Type': 'application/json'
@@ -87,7 +89,7 @@ export const getFields = <T extends keyof FieldsTypeMap>(field?: T, offset?: num
 }
 
 export const filter = (product: string, brand: string, price: number): Promise<{ result: Array<string> }> => {
-  return fetch('http://api.valantis.store:40000/', {
+  return fetch(url, {
     headers: {
       'X-Auth': getAuth(),
       'Content-Type': 'application/json'
