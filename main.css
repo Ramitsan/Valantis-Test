@@ -1,0 +1,205 @@
+.card {
+  width: 28%;
+  max-width: 380px;
+  margin: 10px;
+  padding: 10px;
+  flex-grow: 1;
+  background-color: #fff;
+  border: 1px solid #79c8eb;
+  list-style: none;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.card:focus,
+.card:hover {
+  box-shadow: 0 3px 11px 1px #a7ccf0; 
+  transition: all .2s ease;
+}
+
+.card span {
+  color: #9609c9;
+  font-weight: bold;
+}
+.cards-wrapper {
+  width: 100%;
+}
+
+.cards-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-left: 0;
+}
+
+.search-input {
+  width: 80%;
+  padding: 10px 7px;
+  border: 1px solid #79c8eb;
+}
+
+.search-input:focus,
+.search-input:hover {
+  box-shadow: 0px 0px 6px #a7ccf0;
+  outline: 0;
+}
+
+.select {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.select__input {
+  width: 80%;
+  padding: 10px 7px;
+  border: 1px solid #79c8eb;
+}
+
+.select__input:focus,
+.select__input:hover {
+  box-shadow: 0px 0px 6px #a7ccf0;
+  outline: 0;
+}
+
+.select__container {
+  width: 80%;
+  height: 0;
+  position: absolute;  
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition-duration: 400ms;
+}
+
+.select__container--open {
+  height: 365px;
+}
+
+.select__item {
+  padding: 5px;
+  padding-left: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #f3f3f3;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.select__item:focus,
+.select__item:hover {  
+  background-color: rgb(199, 177, 233);
+  transition: all .2s ease;
+}
+
+.select__item--selected {
+  background-color: #79c8eb;
+}
+.filters-panel {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.filter-block,
+.search-block {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.filter-title {
+  margin: 0px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.pagination {
+  width: 25%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination__button {
+  width: 45%;
+  position: relative;
+  padding: 10px;
+  background-color: #9609c9;
+  color: #fff;
+  border: 1px solid #9609c9;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination__button:hover {
+  border: 1px solid #fff;
+}
+
+.pagination__button:active {
+  opacity: .7;
+}
+
+.pagination__button--back::after {
+  content: "";
+  position: absolute;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkiIGhlaWdodD0iNTIiIHZpZXdCb3g9IjAgMCAyOSA1MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI3LjUwMDcgNTAuNTE3OEwyNy41MDA1IDUwLjUxOEMyNy4yOTkyIDUwLjcxODMgMjcuMDU5MiA1MC44NzczIDI2Ljc5NDYgNTAuOTg1N0MyNi41MyA1MS4wOTQyIDI2LjI0NiA1MS4xNSAyNS45NTkyIDUxLjE1QzI1LjY3MjQgNTEuMTUgMjUuMzg4NCA1MS4wOTQyIDI1LjEyMzggNTAuOTg1N0MyNC44NTkyIDUwLjg3NzMgMjQuNjE5MiA1MC43MTgzIDI0LjQxNzkgNTAuNTE4TDI0LjQxNzYgNTAuNTE3N0wxLjUyMDg5IDI3LjYxMThMMS41MjA4NyAyNy42MTE3QzEuMDkxMTYgMjcuMTgxOCAwLjg1MDAwMSAyNi42MDQzIDAuODUwMDAxIDI2LjAwMjJDMC44NTAwMDEgMjUuNDAwMSAxLjA5MTE2IDI0LjgyMjcgMS41MjA4NyAyNC4zOTI3TDEuNjI2OTcgMjQuNDk4N0wxLjUyMDg4IDI0LjM5MjdMMjQuNDEzMiAxLjQ4Njc3QzI0LjYxNDYgMS4yODUgMjQuODU1MiAxLjEyNDg0IDI1LjEyMDcgMS4wMTU1NEMyNS4zODYyIDAuOTA2MjU4IDI1LjY3MTMgMC44NDk5OTggMjUuOTU5MiAwLjg0OTk5OEMyNi4yNDcxIDAuODQ5OTk4IDI2LjUzMjMgMC45MDYyNTggMjYuNzk3NyAxLjAxNTU0QzI3LjA2MzIgMS4xMjQ4NCAyNy4zMDM4IDEuMjg1IDI3LjUwNTIgMS40ODY3N0MyNy45MTgyIDEuODk5MiAyOC4xNSAyLjQ1MzU5IDI4LjE1IDMuMDMxNjRDMjguMTUgMy42MTA1NiAyNy45MTMxIDQuMTY0NzUgMjcuNTAwNyA0LjU3NjZDMjcuNTAwNyA0LjU3NjYyIDI3LjUwMDcgNC41NzY2NCAyNy41MDA3IDQuNTc2NjdMNi4wODgwMSAyNi4wMDIyTDI3LjUwMDcgNDcuNDI3N0MyNy45MTM3IDQ3Ljg0MDIgMjguMTQ1NiA0OC4zOTQ2IDI4LjE0NTYgNDguOTcyOEMyOC4xNDU2IDQ5LjU1MDkgMjcuOTEzNyA1MC4xMDU0IDI3LjUwMDcgNTAuNTE3OFoiIGZpbGw9IiNEREREREQiIHN0cm9rZT0iI0RERERERCIgc3Ryb2tlLXdpZHRoPSIwLjMiLz4KPC9zdmc+Cg==);
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 15px;
+  background-size: 10px 15px;
+  background-repeat: no-repeat;
+}
+
+.pagination__button--next::after {
+  content: "";
+  position: absolute;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjkiIGhlaWdodD0iNTIiIHZpZXdCb3g9IjAgMCAyOSA1MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuNDk5MzUgMS40ODIxOUwxLjQ5OTUxIDEuNDgyMDNDMS43MDA3NyAxLjI4MTY4IDEuOTQwNzggMS4xMjI3MiAyLjIwNTM5IDEuMDE0MjZDMi40NyAwLjkwNTgxNCAyLjc1NCAwLjg1IDMuMDQwOCAwLjg1QzMuMzI3NiAwLjg1IDMuNjExNiAwLjkwNTgxNCAzLjg3NjIxIDEuMDE0MjZDNC4xNDA4MiAxLjEyMjcyIDQuMzgwODQgMS4yODE2OCA0LjU4MjA5IDEuNDgyMDNMNC41ODIzNSAxLjQ4MjI5TDI3LjQ3OTEgMjQuMzg4MkwyNy40NzkxIDI0LjM4ODJDMjcuOTA4OCAyNC44MTgyIDI4LjE1IDI1LjM5NTcgMjguMTUgMjUuOTk3OEMyOC4xNSAyNi41OTk4IDI3LjkwODggMjcuMTc3MyAyNy40NzkxIDI3LjYwNzNMMjcuMzczIDI3LjUwMTNMMjcuNDc5MSAyNy42MDczTDQuNTg2ODUgNTAuNTEzMkM0LjM4NTQ0IDUwLjcxNSA0LjE0NDgzIDUwLjg3NTIgMy44NzkzNCA1MC45ODQ1QzMuNjEzODUgNTEuMDkzNyAzLjMyODc0IDUxLjE1IDMuMDQwOCA1MS4xNUMyLjc1Mjg2IDUxLjE1IDIuNDY3NzUgNTEuMDkzNyAyLjIwMjI3IDUwLjk4NDVDMS45MzY3NyA1MC44NzUyIDEuNjk2MTcgNTAuNzE1IDEuNDk0NzYgNTAuNTEzMkMxLjA4MTg0IDUwLjEwMDggMC44NTAwMDIgNDkuNTQ2NCAwLjg1MDAwMiA0OC45Njg0QzAuODUwMDAyIDQ4LjM4OTQgMS4wODY4OSA0Ny44MzUyIDEuNDk5MjcgNDcuNDIzNEMxLjQ5OTMgNDcuNDIzNCAxLjQ5OTMyIDQ3LjQyMzQgMS40OTkzNSA0Ny40MjMzTDIyLjkxMiAyNS45OTc4TDEuNDk5MzUgNC41NzIyNkMxLjA4NjMyIDQuMTU5ODIgMC44NTQ0MTcgMy42MDUzNiAwLjg1NDQxNyAzLjAyNzIzQzAuODU0NDE3IDIuNDQ5MDkgMS4wODYzMiAxLjg5NDY0IDEuNDk5MzUgMS40ODIxOVoiIGZpbGw9IiNEREREREQiIHN0cm9rZT0iI0RERERERCIgc3Ryb2tlLXdpZHRoPSIwLjMiLz4KPC9zdmc+Cg==);
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 15px;
+  background-size: 10px 15px;
+  background-repeat: no-repeat;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+  box-sizing: border-box;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 140%;
+  background-color: #d9f1f8;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; 
+  padding: 20px 0 50px;
+}
+
+.main-wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/*# sourceMappingURL=main.css.map*/
