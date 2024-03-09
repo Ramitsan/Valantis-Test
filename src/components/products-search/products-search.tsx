@@ -15,7 +15,6 @@ export function ProductsSearch({onSearch, initialProduct} : IProductSearchProps)
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      console.log('update');
       onSearch(currentProduct);
     }, 2000);
   

@@ -25,7 +25,6 @@ export const getIds = (offset = 0, limit: number = undefined): Promise<{ result:
     .then(res => {
       if (res.status == 500) {
         return res.text().then(text => {
-          console.log(res.status.toString(), text);
           return getIds(offset, limit);
         })
       } else {
@@ -49,7 +48,6 @@ export const getItems = (ids: Array<string>): Promise<{ result: Array<ICardData>
     .then(res => {
       if (res.status == 500) {
         return res.text().then(text => {
-          console.log(res.status.toString(), text);
           return getItems(ids);
         })
       } else {
@@ -79,7 +77,6 @@ export const getFields = <T extends keyof FieldsTypeMap>(field?: T, offset?: num
     .then(res => {
       if (res.status == 500) {
         return res.text().then(text => {
-          console.log(res.status.toString(), text);
           return getFields(field, offset, limit);
         })
       } else {
@@ -104,7 +101,6 @@ export const filter = (product: string, brand: string, price: number): Promise<{
     .then(res => {
       if (res.status == 500) {
         return res.text().then(text => {
-          console.log(res.status.toString(), text);
           return filter(product, brand, price);
         })
       } else {

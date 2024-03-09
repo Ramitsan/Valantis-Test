@@ -32,7 +32,6 @@ export default function App() {
       setPageItems([]);
       return;
     }
-    console.log(notDublicatedIds?.length, JSON.stringify(productFilters));
     getItems(notDublicatedIds.slice(page * 50, (page + 1) * 50)).then(response => setPageItems(response.result));
   }, [notDublicatedIds, page]);
 
@@ -57,8 +56,7 @@ export default function App() {
     <>
       <div className="main-wrapper">
         <FiltersPanel initialFilters={productFilters} fields={fields} onFilter={filters => {
-          setProductFilters(filters);
-          console.log(125, JSON.stringify(filters));         
+          setProductFilters(filters);      
         }} />           
         <CardsList cardItems={pageItems} />
         <Pagination onChange={(value) => setPage(value)} currentPage={page} maxPage={Math.ceil(notDublicatedIds.length / 50)} />
