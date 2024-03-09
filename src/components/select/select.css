@@ -29,6 +29,7 @@
 
 .select__container--open {
   height: 365px;
+  z-index: 1000;
 }
 
 .select__item {
