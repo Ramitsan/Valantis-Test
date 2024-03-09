@@ -22,6 +22,7 @@ export function Select({ items, onSelect, currentIndex }: ISelectProps) {
   return (
     <div className="select">
       <input className="select__input" type="text" value={items[selected] || 'Not selected'}
+        onChange={(evt) => evt.preventDefault()}
         onFocus={() => { setOpen(true) }}
         onBlur={() => { setOpen(false) }}
       />
